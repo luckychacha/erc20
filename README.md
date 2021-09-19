@@ -1,11 +1,13 @@
 1.测试结果截图
 ![测试结果截图](./test_result.png)
 
-1.合约编译截图
+2.合约编译截图
 ![合约编译截图](./contract_build.png)
-2.canvas-ui 合约内容截图
+
+3.canvas-ui 合约内容截图
 ![canvas-ui 合约内容截图](./contract_content.png)
-3.dave 授权 alice 可以从 dave 账号中抽取 100。
+
+4.dave 授权 alice 可以从 dave 账号中抽取 100。
 ```shell
     allowance
         |->caller:dave,
@@ -14,7 +16,7 @@
 ```
 ![canvas-ui 设置授权](./set_allowance.png)
 
-4.由于超出授权金额，所以 transfer_from 失败。
+5.由于超出授权金额，所以 transfer_from 失败。
 ```shell
     transfer_from:
         Call from Account:alice
@@ -24,7 +26,7 @@
 ```
 ![canvas-ui transfer_from 失败](./transfer_from_failed_when_insufficient_approval.png)
 
-5.由于未超出授权金额，所以 transfer_from 成功。
+6.由于未超出授权金额，所以 transfer_from 成功。
 ```shell
     transfer_from:
         Call from Account:alice
