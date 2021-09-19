@@ -1,3 +1,6 @@
+1.测试结果截图
+![测试结果截图](./test_result.png)
+
 1.合约编译截图
 ![合约编译截图](./contract_build.png)
 2.canvas-ui 合约内容截图
