@@ -8,10 +8,7 @@ mod tests;
 #[ink::contract]
 mod erc20 {
 
-    use ink_storage::{
-        collections::HashMap,
-        lazy::Lazy,
-    };
+    use ink_storage::{collections::HashMap, lazy::Lazy};
 
     #[ink(storage)]
     pub struct Erc20 {
@@ -55,7 +52,7 @@ mod erc20 {
 
             Self::env().emit_event(Transfer {
                 from: None,
-                to:Some(caller),
+                to: Some(caller),
                 value: supply,
             });
 
@@ -83,7 +80,7 @@ mod erc20 {
 
         #[ink(message)]
         pub fn transfer(&mut self, to: AccountId, value: Balance) -> Result<()> {
-            let from = self.env().caller();//Self::env().caller();
+            let from = self.env().caller(); //Self::env().caller();
             self.inner_tranfer(from, to, value)
         }
 
@@ -110,7 +107,7 @@ mod erc20 {
             &mut self,
             from: AccountId,
             to: AccountId,
-            value: Balance
+            value: Balance,
         ) -> Result<()> {
             let caller = self.env().caller();
             let allowance = self.allowance(from, caller);
@@ -127,7 +124,7 @@ mod erc20 {
             &mut self,
             from: AccountId,
             to: AccountId,
-            value: Balance
+            value: Balance,
         ) -> Result<()> {
             let from_balance = self.balance_of(from);
             if from_balance < value {
@@ -138,14 +135,12 @@ mod erc20 {
 
             let to_balance = self.balance_of(to);
             self.balances.insert(to, to_balance + value);
-            self.env().emit_event(
-                Transfer {
-                    from: Some(from),
-                    to: Some(to),
-                    value
-                }
-            );
-            
+            self.env().emit_event(Transfer {
+                from: Some(from),
+                to: Some(to),
+                value,
+            });
+
             Ok(())
         }
     }

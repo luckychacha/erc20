@@ -11,24 +11,27 @@ fn new_works() {
 fn total_supply_works() {
     let contract = erc20::Erc20::new(100);
     assert_eq!(contract.total_supply(), 100);
-    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x01; 32])), 100);
+    assert_eq!(
+        contract.balance_of(ink_env::AccountId::from([0x01; 32])),
+        100
+    );
     assert_eq!(contract.balance_of(ink_env::AccountId::from([0; 32])), 0);
 }
 
 #[ink::test]
 fn balance_works() {
     let contract = erc20::Erc20::new(100);
-    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x01; 32])), 100);
+    assert_eq!(
+        contract.balance_of(ink_env::AccountId::from([0x01; 32])),
+        100
+    );
 }
 
 #[ink::test]
 fn allowance_works() {
     let mut contract = erc20::Erc20::new(100);
     assert_eq!(
-        contract.approve(
-            ink_env::AccountId::from([0x01; 32]),
-            5
-        ),
+        contract.approve(ink_env::AccountId::from([0x01; 32]), 5),
         Ok(())
     );
     assert_eq!(
@@ -55,9 +58,11 @@ fn transfer_works() {
         Ok(())
     );
     assert_eq!(contract.balance_of(ink_env::AccountId::from([0x01; 32])), 0);
-    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x02; 32])), 100);
+    assert_eq!(
+        contract.balance_of(ink_env::AccountId::from([0x02; 32])),
+        100
+    );
 }
-
 
 #[ink::test]
 fn transfer_failed_when_insufficient_balance() {
@@ -66,14 +71,20 @@ fn transfer_failed_when_insufficient_balance() {
         contract.transfer(ink_env::AccountId::from([0x02; 32]), 101),
         Err(erc20::Error::InsufficientBalance)
     );
-    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x01; 32])), 100);
+    assert_eq!(
+        contract.balance_of(ink_env::AccountId::from([0x01; 32])),
+        100
+    );
     assert_eq!(contract.balance_of(ink_env::AccountId::from([0x02; 32])), 0);
 }
 
 #[ink::test]
 fn approve_works() {
     let mut contract = erc20::Erc20::new(100);
-    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x01; 32])), 100);
+    assert_eq!(
+        contract.balance_of(ink_env::AccountId::from([0x01; 32])),
+        100
+    );
     assert_eq!(
         contract.approve(ink_env::AccountId::from([0x02; 32]), 100),
         Ok(())
@@ -108,7 +119,6 @@ fn inner_tranfer_works() {
     );
 }
 
-
 #[ink::test]
 fn inner_tranfer_failed_when_insufficient_balance() {
     let mut contract = erc20::Erc20::new(100);
@@ -124,16 +134,13 @@ fn inner_tranfer_failed_when_insufficient_balance() {
         contract.balance_of(ink_env::AccountId::from([0x01; 32])),
         100
     );
-    assert_eq!(
-        contract.balance_of(ink_env::AccountId::from([0x02; 32])),
-        0
-    );
+    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x02; 32])), 0);
 }
 
 #[ink::test]
 fn transfer_from_works() {
     let mut contract = erc20::Erc20::new(100);
-    let _ = contract.approve(ink_env::AccountId::from([0x01;32]), 50);
+    let _ = contract.approve(ink_env::AccountId::from([0x01; 32]), 50);
     assert_eq!(
         contract.transfer_from(
             ink_env::AccountId::from([0x01; 32]),
@@ -155,7 +162,7 @@ fn transfer_from_works() {
 #[ink::test]
 fn transfer_from_failed_when_insufficient_approval() {
     let mut contract = erc20::Erc20::new(100);
-    let _ = contract.approve(ink_env::AccountId::from([0x01;32]), 50);
+    let _ = contract.approve(ink_env::AccountId::from([0x01; 32]), 50);
     assert_eq!(
         contract.transfer_from(
             ink_env::AccountId::from([0x01; 32]),
@@ -168,17 +175,13 @@ fn transfer_from_failed_when_insufficient_approval() {
         contract.balance_of(ink_env::AccountId::from([0x01; 32])),
         100
     );
-    assert_eq!(
-        contract.balance_of(ink_env::AccountId::from([0x02; 32])),
-        0
-    );
+    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x02; 32])), 0);
 }
-
 
 #[ink::test]
 fn transfer_from_failed_when_insufficient_balance() {
     let mut contract = erc20::Erc20::new(100);
-    let _ = contract.approve(ink_env::AccountId::from([0x01;32]), 200);
+    let _ = contract.approve(ink_env::AccountId::from([0x01; 32]), 200);
     assert_eq!(
         contract.transfer_from(
             ink_env::AccountId::from([0x01; 32]),
@@ -191,8 +194,5 @@ fn transfer_from_failed_when_insufficient_balance() {
         contract.balance_of(ink_env::AccountId::from([0x01; 32])),
         100
     );
-    assert_eq!(
-        contract.balance_of(ink_env::AccountId::from([0x02; 32])),
-        0
-    );
+    assert_eq!(contract.balance_of(ink_env::AccountId::from([0x02; 32])), 0);
 }
